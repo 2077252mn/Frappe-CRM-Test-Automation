@@ -130,6 +130,170 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Query Lead",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"状态码为200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "\r",
+              "pm.test(\"返回数据列表\", function () {\r",
+              "\r",
+              "    let jsonData = pm.response.json();\r",
+              "\r",
+              "    pm.expect(jsonData)\r",
+              "        .to.have.property(\"data\");\r",
+              "\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "sid=e15f303b40c4342d2afae8fcebebf4d86cd5c09109fa210f3d199f71",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8000/api/resource/CRM%20Lead",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "resource",
+            "CRM%20Lead"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Lead",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"状态码正确\", function () {\r",
+              "    pm.expect(pm.response.code)\r",
+              "        .to.be.oneOf([200,201]);\r",
+              "});\r",
+              "\r",
+              "\r",
+              "pm.test(\"Lead创建成功\", function () {\r",
+              "\r",
+              "    let jsonData = pm.response.json();\r",
+              "\r",
+              "    pm.expect(jsonData.data.first_name)\r",
+              "        .to.eql(\"接口测试用户\");\r",
+              "\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "sid=e15f303b40c4342d2afae8fcebebf4d86cd5c09109fa210f3d199f71",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"first_name\": \"接口测试用户\",\r\n    \"mobile_no\": \"13900139000\",\r\n    \"email_id\": \"apitest@test.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/resource/CRM%20Lead",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "resource",
+            "CRM%20Lead"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Query Created Lead",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"查询接口返回数据\", function () {\r",
+              "    let jsonData = pm.response.json();\r",
+              "\r",
+              "    pm.expect(jsonData.data.length)\r",
+              "        .to.be.above(0);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "sid=e15f303b40c4342d2afae8fcebebf4d86cd5c09109fa210f3d199f71",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8000/api/resource/CRM%20Lead",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "resource",
+            "CRM%20Lead"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
