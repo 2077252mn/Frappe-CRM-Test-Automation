@@ -1,0 +1,135 @@
+{
+  "info": {
+    "_postman_id": "2d6730c9-acdf-4515-87aa-e949867451e7",
+    "name": "Frappe CRM API Test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56666282",
+    "_collection_link": "https://go.postman.co/collection/56666282-2d6730c9-acdf-4515-87aa-e949867451e7?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Login Success",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"状态码为200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"登录成功\", function () {\r",
+              "\r",
+              "    let jsonData = pm.response.json();\r",
+              "\r",
+              "    pm.expect(jsonData.message)\r",
+              "        .to.eql(\"Logged In\");\r",
+              "\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "usr",
+              "value": "Administrator",
+              "type": "text",
+              "uuid": "c2d8cddd-4f6b-4dbc-bea2-4a5459da2452"
+            },
+            {
+              "key": "pwd",
+              "value": "admin",
+              "type": "text",
+              "uuid": "994f9309-c4f6-42ff-996d-0859b8757e21"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/method/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "method",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login Wrong Password",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"状态码为401\", function () {\r",
+              "    pm.response.to.have.status(401);\r",
+              "});\r",
+              "\r",
+              "\r",
+              "pm.test(\"错误密码登录失败\", function () {\r",
+              "\r",
+              "    let jsonData = pm.response.json();\r",
+              "\r",
+              "    pm.expect(jsonData.message)\r",
+              "        .to.not.eql(\"Logged In\");\r",
+              "\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "usr",
+              "value": "Administrator",
+              "type": "text",
+              "uuid": "c2d8cddd-4f6b-4dbc-bea2-4a5459da2452"
+            },
+            {
+              "key": "pwd",
+              "value": "123456",
+              "type": "text",
+              "uuid": "994f9309-c4f6-42ff-996d-0859b8757e21"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/method/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "method",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
