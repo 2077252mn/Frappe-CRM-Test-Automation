@@ -1,0 +1,12 @@
+.codex_tmp/
+
+# JMeter generated results and HTML reports
+performance/results/
+performance/reports/
+
+# Microsoft Office temporary files
+~$*.xlsx
+~$*.docx
+
+# Personal resume files
+软件测试*.docx
